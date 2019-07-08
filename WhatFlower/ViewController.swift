@@ -9,6 +9,8 @@
 import UIKit
 import CoreML
 import Vision
+import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
@@ -61,13 +63,44 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 fatalError("Model failed to process image")
             }
             
-            print(results)
-            
-            if let topResult = results.first {
-                self.navigationItem.title = topResult.identifier.capitalized
-            } else {
-                self.navigationItem.title = "Unknown!"
+            guard let flowerName = results.first?.identifier else {
+                fatalError("Could not get result")
             }
+            
+            self.navigationItem.title = flowerName.capitalized
+            
+            // Will probably move this to a new view showing details, but for now
+            let wikipediaURl = "https://en.wikipedia.org/w/api.php"
+            
+            let parameters : [String:String] = [
+                "format" : "json",
+                "action" : "query",
+                "prop" : "extracts",
+                "exintro" : "",
+                "explaintext" : "",
+                "titles" : flowerName,
+                "indexpageids" : "",
+                "redirects" : "1",
+            ]
+
+            Alamofire
+                .request(wikipediaURl, method: .get, parameters: parameters)
+                .responseJSON {
+                    response in
+                    if response.result.isSuccess {
+                        
+                        print("Success! Got wikipedia data.")
+                        
+                        let wikiJSON : JSON = JSON(response.result.value!)
+                        
+                        print(wikiJSON)
+                        
+                    }
+                    else {
+                        print("Error: \(response.result.error!)")
+                    }
+            }
+            
         }
         
         let handler = VNImageRequestHandler(cgImage: image)
