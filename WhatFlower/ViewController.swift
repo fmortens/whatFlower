@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreML
+import Vision
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
@@ -27,20 +29,61 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
     ) {
         
-        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+        guard let userPickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             fatalError("Could not get image!")
         }
         
-        imageView.image = image
+        imageView.image = userPickedImage
+        
+        guard let cgImage = userPickedImage.cgImage else {
+            fatalError("Could not convert image to CGImage")
+        }
+        
+        detect(image: cgImage)
         
         imagePicker.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func detect(image: CGImage) {
+        
+        guard let model = try? VNCoreMLModel(for: Oxford102().model) else {
+            fatalError("Could not load model")
+        }
+        
+        let request = VNCoreMLRequest(model: model) { (request, error) in
+            
+            if error != nil {
+                fatalError("Could not process image \(error!)")
+            }
+            
+            guard let results = request.results as? [VNClassificationObservation] else {
+                fatalError("Model failed to process image")
+            }
+            
+            print(results)
+            
+            if let topResult = results.first {
+                self.navigationItem.title = topResult.identifier
+            } else {
+                self.navigationItem.title = "Unknown!"
+            }
+        }
+        
+        let handler = VNImageRequestHandler(cgImage: image)
+        
+        do {
+            try handler.perform([request])
+        } catch {
+            print("Could not perform request \(error)")
+        }
         
     }
     
     @IBAction func cameraButtonTapped(_ sender: UIBarButtonItem) {
         
         imagePicker.sourceType = .camera
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         
         present(imagePicker, animated: true, completion: nil)
         
@@ -49,7 +92,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func photoLibraryButtonTapped(_ sender: UIBarButtonItem) {
         
         imagePicker.sourceType = .photoLibrary
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         
         present(imagePicker, animated: true, completion: nil)
         

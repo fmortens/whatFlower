@@ -12,7 +12,7 @@
 		DE99408322D3567800A98B84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE99408122D3567800A98B84 /* Main.storyboard */; };
 		DE99408522D3567900A98B84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE99408422D3567900A98B84 /* Assets.xcassets */; };
 		DE99408822D3567900A98B84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE99408622D3567900A98B84 /* LaunchScreen.storyboard */; };
-		DE99409022D3569B00A98B84 /* oxford102.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = DE99408F22D3569B00A98B84 /* oxford102.mlmodel */; };
+		DE99409022D3569B00A98B84 /* Oxford102.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = DE99408F22D3569B00A98B84 /* Oxford102.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,7 @@
 		DE99408422D3567900A98B84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE99408722D3567900A98B84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE99408922D3567900A98B84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DE99408F22D3569B00A98B84 /* oxford102.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = oxford102.mlmodel; sourceTree = "<group>"; };
+		DE99408F22D3569B00A98B84 /* Oxford102.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Oxford102.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +62,7 @@
 				DE99408422D3567900A98B84 /* Assets.xcassets */,
 				DE99408622D3567900A98B84 /* LaunchScreen.storyboard */,
 				DE99408922D3567900A98B84 /* Info.plist */,
-				DE99408F22D3569B00A98B84 /* oxford102.mlmodel */,
+				DE99408F22D3569B00A98B84 /* Oxford102.mlmodel */,
 			);
 			path = WhatFlower;
 			sourceTree = "<group>";
@@ -139,7 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE99408022D3567800A98B84 /* ViewController.swift in Sources */,
-				DE99409022D3569B00A98B84 /* oxford102.mlmodel in Sources */,
+				DE99409022D3569B00A98B84 /* Oxford102.mlmodel in Sources */,
 				DE99407E22D3567800A98B84 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
