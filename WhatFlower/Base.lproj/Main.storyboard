@@ -19,15 +19,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I4F-ob-H3A">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="361"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="I4F-ob-H3A" secondAttribute="height" multiplier="414:361" id="btn-1s-jyZ"/>
+                                </constraints>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ny9-8v-BR8">
+                                <rect key="frame" x="20" y="457" width="374" height="439"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="I4F-ob-H3A" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="5lc-dm-7cy"/>
-                            <constraint firstItem="I4F-ob-H3A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Qsr-cj-kfG"/>
-                            <constraint firstItem="I4F-ob-H3A" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Wz5-Mz-K3Z"/>
-                            <constraint firstAttribute="bottom" secondItem="I4F-ob-H3A" secondAttribute="bottom" id="mVC-es-OZs"/>
+                            <constraint firstItem="I4F-ob-H3A" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="StK-fu-Y3v"/>
+                            <constraint firstItem="I4F-ob-H3A" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="VJN-Uh-V3E"/>
+                            <constraint firstItem="I4F-ob-H3A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lSC-cs-BgC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -47,6 +56,7 @@
                         <outlet property="cameraButton" destination="nxp-so-5TW" id="PNM-sL-dux"/>
                         <outlet property="imageView" destination="I4F-ob-H3A" id="WRx-v7-Ixa"/>
                         <outlet property="photoLibraryButton" destination="iAY-BB-cjA" id="NE1-Ni-kNl"/>
+                        <outlet property="textView" destination="Ny9-8v-BR8" id="wfp-LM-vxK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
