@@ -11,6 +11,7 @@ import CoreML
 import Vision
 import Alamofire
 import SwiftyJSON
+import SDWebImage
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
@@ -37,8 +38,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             fatalError("Could not get image!")
         }
         
-        imageView.image = userPickedImage
-        
         guard let cgImage = userPickedImage.cgImage else {
             fatalError("Could not convert image to CGImage")
         }
@@ -61,6 +60,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 fatalError("Model failed to process image")
             }
             
+            print(request.results!)
+            
             self.navigationItem.title = classification.identifier.capitalized
             
             self.lookupFlowerInformationFromWikipedia(flowerName: classification.identifier)
@@ -82,12 +83,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let parameters : [String:String] = [
             "format" : "json",
             "action" : "query",
-            "prop" : "extracts",
+            "prop" : "extracts|pageimages",
             "exintro" : "",
             "explaintext" : "",
             "titles" : flowerName,
             "indexpageids" : "",
             "redirects" : "1",
+            "pithumbsize" : "500"
         ]
         
         Alamofire
@@ -97,8 +99,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 if response.result.isSuccess {
                     
                     let wikiJSON : JSON = JSON(response.result.value!)
+                    
+                    print(wikiJSON)
+                    
                     let pageId = wikiJSON["query"]["pageids"][0].stringValue
                     let extract = wikiJSON["query"]["pages"][pageId]["extract"].stringValue
+                    let imageURL = wikiJSON["query"]["pages"][pageId]["thumbnail"]["source"].stringValue
+                    
+                    self.imageView.sd_setImage(with: URL(string: imageURL), completed: nil)
                     
                     self.textView.text = extract
                     
